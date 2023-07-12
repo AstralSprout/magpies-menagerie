@@ -98,7 +98,9 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="Magpie&#39;s Menagerie v2" startnode="17" creator="Twine" creator-version="2.6.2" format="SugarCube" format-version="2.36.1" ifid="889650a2-6fee-4bbc-b684-01a06b67756e" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url("https://use.fontawesome.com/releases/v5.0.6/css/all.css");
+	<tw-storydata name="Magpie&#39;s Menagerie v2" startnode="17" creator="Twine" creator-version="2.6.2" format="SugarCube" format-version="2.36.1" ifid="889650a2-6fee-4bbc-b684-01a06b67756e" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url("font-family:'cappuccicons';");
+
+@import url("https://use.fontawesome.com/releases/v5.0.6/css/all.css");
 
 @import url('https://fonts.googleapis.com/css2?family=Labrada:ital,wght@0,400;0,600;1,400&family=Macondo+Swash+Caps&family=Modern+Antiqua&display=swap');
 
@@ -142,10 +144,19 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
   --accent-font: 'Modern Antiqua', cursive;
   */
   --body-bg-d: #0d1212;
-  /* --body-bg-d: #141414; ALT */
   --text-d: #c0bdba;
   --main-bg-d: rgba(51,70,69,0.5);
   --accent-bg-d: #6b8180;
+
+  /* NEW COLOURS */
+
+  --darkbg: rgba(20,20,20,.9);
+  --lightbg: rgba(214,210,207,.8);
+  --white: #c1c1c1;
+  --dgrey: #333333;
+  /* --accent: #8395ba; */
+  --accent: #393756; /* purple */
+  --bluegreen: #2b4646;
 }
 
 /* ------------------------
@@ -155,8 +166,10 @@ styles for default appearance
 ------------------------ */
 
 body {
+  background-image: url('https://cdn.discordapp.com/attachments/768631408079142953/1127111985759260712/MM_BG_sm.png');
+  background-size: cover;
   background-color: var(--body-bg);
-  color: var(--text);
+  color: var(--white);
   font-family: var(--body-font);
   padding: 0;
   margin:0 auto;
@@ -205,8 +218,10 @@ h3 {
 /* LINK STYLING */
 
 a {
-	color: var(--text);
+	color: var(--bluegreen);
 	text-decoration: none;
+    border-radius: 10px;
+    padding: 3px;
 	
 	-webkit-transition: all 1s ease;
 	-moz-transition: all 1s ease;
@@ -216,11 +231,12 @@ a {
 }
 
 a:hover {
-	color: var(--hlink);
-	background-color: var(--accent-bg);
-	border-radius: 5px;
+	color: var(--accent);
+	background-color: var(--lightbg);
+	border-radius: 10px;
     padding: 3px;
 	text-decoration: none;
+    letter-spacing: 2px;
 	
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
@@ -252,6 +268,46 @@ a.link-visited {
 /* Your CSS Here */
 }
 
+.macro-cycle {
+  position: relative;
+}
+
+.macro-cycle:hover {
+  background-color: transparent;
+}
+
+.macro-cycle::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  left: 0;
+  height: 1px;
+  border-radius: 2px;
+  background: linear-gradient(to left, #393756, #2b4646 100%);
+  -webkit-text-decoration-skip: ink;
+  text-decoration-skip: ink;
+}
+
+.macro-cycle::after {
+  content: " \f021";
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  display: inline-block;
+  font-size: .6em;
+  padding-left: .8em;
+  color: var(--accent);
+}
+.macro-cycle:hover::after {
+  content: " \f021";
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  display: inline-block;
+  font-size: .6em;
+  padding-left: .8em;
+  color: var(--bluegreen);
+}
+
 /* ------------------------
 
 general styling for interface
@@ -277,6 +333,20 @@ general styling for interface
 
 #header {
   width: 100%;
+  font-family: var(--header-font);
+  background-color: transparent;
+  z-index: -15;
+  
+  padding: 1em;
+  padding-left: 50%;
+  font-size: 1.2em;
+  letter-spacing: 0.2em;
+  transition:0.8s;
+  margin-top:20px;
+}
+
+/* #header {
+  width: 100%;
   box-sizing: border-box;
   padding: 1em;
   padding-left: 50px;
@@ -285,9 +355,9 @@ general styling for interface
   letter-spacing: 0.2em;
   transition:0.8s;
   margin-top:20px;
-  border-bottom:1px solid var(--main-bg);
+  border-bottom:1px solid var(--darkbg);
   background-color: var(--body-bg);
-}
+} */
 
 /* ------------------------
 
@@ -297,8 +367,10 @@ main game content appears
 ------------------------ */
 
 #passages {
-  background-color: var(--main-bg);
-  border: 1px solid transparent;
+  background-color: var(--darkbg);
+  border: 10px solid var(--darkbg);
+  outline: 2px solid var(--white);
+  outline-offset: -10px;
   border-radius: 10px;
   max-height: 80vh;
   min-height: 70vh;
@@ -312,17 +384,20 @@ main game content appears
   padding: 2em 5em;
   letter-spacing: 1px;
   scrollbar-width: thin;
-  scrollbar-color: var(--accent-bg) transparent;
+  scrollbar-color: var(--dgrey) transparent;
 }
 
 .passage {
   line-height: 200%;
   text-align: justify;
-  font-size: 1em;
+  font-size: 1.1em;
 }
 
 body.choice .passage a:before {
     content: "✦ ";
+}
+body.choice .passage a {
+    letter-spacing: 1px;
 }
 
 #textbox-error {
@@ -331,21 +406,33 @@ body.choice .passage a:before {
 /* Buttons */
 
 button {
-  background-color: transparent;
-  border: outset 2px var(--accent-bg);
-  border-radius: 5px;
+  background-color: var(--dgrey);
+  border-radius: 10px;
+  border: solid 1px transparent;
   padding: 3px;
   font-family: var(--accent-font);
-  color: var(--text);
+  color: var(--white);
+  
+  -webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
 }
 button:hover {
-  background-color: var(--accent-bg);
-  border: outset 2px #445d5c;
-  border-radius: 5px;
+  background-color: var(--lightbg);
+  border-radius: 10px;
+  border: solid 1px transparent;
   padding: 3px;
-  color: var(--hlink);
-  background-color: #77908f;
+  color: var(--accent);
   text-decoration: none;
+  letter-spacing: 2px;
+  
+  -webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
 }
 button:disabled {
   background-color: transparent;
@@ -355,32 +442,35 @@ button:disabled {
 /* --- List Boxes -- */
 
 input, select, textarea {
-  color: var(--text);
-  border: 1px solid var(--accent-bg);
-  background-color: var(--main-bg);
+  color: var(--white);
+  border: 1px solid var(--dgrey);
+  background-color: var(--darkbg);
   font-family: var(--accent-font);
   border-radius: 5px;
   padding: 5px;
 }
 
 select:hover, select:focus {
-  background-color: var(--main-bg);
-  border-color: var(--accent-bg);
+  background-color: var(--darkbg);
+  border-color: var(--dgrey);
   font-family: var(--accent-font);
+  color: var(--accent);
   border-radius: 5px;
   padding: 5px;
 }
 input:hover, input:focus {
-  background-color: var(--main-bg);
-  border-color: var(--accent-bg);
+  background-color: var(--darkbg);
+  border-color: var(--dgrey);
   font-family: var(--accent-font);
+  color: var(--accent);
   border-radius: 5px;
   padding: 5px;
 }
 textarea:hover, textarea:focus {
-  background-color: var(--main-bg);
-  border-color: var(--accent-bg);
+  background-color: var(--darkbg);
+  border-color: var(--dgrey);
   font-family: var(--accent-font);
+  color: var(--accent);
   border-radius: 5px;
   padding: 5px;
 }
@@ -389,51 +479,50 @@ textarea:hover, textarea:focus {
 
 /* DARK THEME */
 
-html.theme-dark body {
-    color: var(--text-d);
-	background-color: var(--body-bg-d);
+html.theme-light body {
+    color: var(--dgrey);
+	background-color: var(--lightbg);
 }
 
-html.theme-dark #passages {
-    color: var(--text-d);
-	background-color: var(--main-bg-d);
+html.theme-light #passages {
+    color: var(--dgrey);
+	background-color: var(--lightbg);
+    border: 10px solid var(--lightbg);
+    outline: 2px solid var(--dgrey);
 }
-html.theme-dark a {
-	color: var(--text-d);
+html.theme-light a {
+	color: var(--dgrey);
 }
-html.theme-dark a:hover {
-	color: var(--hlink);
-	background-color: var(--accent-bg-d);
-}
-html.theme-dark #header {
-  border-bottom:1px solid var(--main-bg-d);
-  background-color: var(--body-bg-d);
-}
-html.theme-dark button {
-  border: outset 2px var(--accent-bg-d);
-  color: var(--text-d);
-}
-html.theme-dark button:hover {
-  background-color: var(--accent-bg-d);
-  border: outset 2px #364a49;
-  background-color: var(--accent-bg-d);
-}
-html.theme-dark #ui-dialog {
-  background-color: var(--body-bg-d);
-}
-html.theme-dark #ui-dialog-titlebar {
-  background-color: var(--body-bg-d);
-  border: 1px solid var(--accent-bg-d);
-}
-html.theme-dark #ui-dialog-body {
-  background-color: var(--body-bg-d);
-  border: 1px solid var(--accent-bg-d);
+html.theme-light a:hover {
+	color: var(--accent);
+	background-color: var(--white);
 }
 
-html.theme-dark input, select, textarea {
-  color: var(--text-d);
-  border: 1px solid var(--accent-bg-d);
-  background-color: var(--main-bg-d);
+html.theme-light button {
+  border: solid 1.3px var(--white);
+  color: var(--dgrey);
+}
+html.theme-light button:hover {
+  background-color: var(--white);
+  border: solid 1.3px var(--white);
+  color: var(--accent);
+}
+html.theme-light #ui-dialog {
+  background-color: var(--lightbg);
+}
+html.theme-light #ui-dialog-titlebar {
+  background-color: var(--lightbg);
+  border: 1px solid var(--accent);
+}
+html.theme-light #ui-dialog-body {
+  background-color: var(--lightbg);
+  border: 1px solid var(--accent);
+}
+
+html.theme-light input, select, textarea {
+  color: var(--dgrey);
+  border: 1px solid var(--accent);
+  background-color: var(--lightbg);
   font-family: var(--accent-font);
   border-radius: 5px;
   font-family: var(--accent-font);
@@ -441,26 +530,64 @@ html.theme-dark input, select, textarea {
   padding: 5px;
 }
 
-html.theme-dark select:hover, html.theme-dark select:focus {
-  background-color: var(--main-bg-d);
-  border-color: var(--accent-bg-d);
+html.theme-light select:hover, html.theme-dark select:focus {
+  background-color: var(--lightbg);
+  border-color: var(--white);
   font-family: var(--accent-font);
   border-radius: 5px;
   padding: 5px;
 }
-html.theme-dark input:hover, html.theme-dark input:focus {
-  background-color: var(--main-bg-d);
-  border-color: var(--accent-bg-d);
+html.theme-light input:hover, html.theme-dark input:focus {
+  background-color: var(--lightbg);
+  border-color: var(--white);
   font-family: var(--accent-font);
   border-radius: 5px;
   padding: 5px;
 }
-html.theme-dark textarea:hover, html.theme-dark textarea:focus {
-  background-color: var(--main-bg-d);
-  border-color: var(--accent-bg-d);
+html.theme-light textarea:hover, html.theme-dark textarea:focus {
+  background-color: var(--lightbg);
+  border-color: var(--white);
   font-family: var(--accent-font);
   border-radius: 5px;
   padding: 5px;
+}
+
+html.theme-light .menu-flex {
+  background-color: var(--lightbg);
+  color: var(--dgrey);
+}
+
+html.theme-light .menu-flex:hover {
+  color: var(--accent);
+}
+
+html.theme-light .menu-flex i:hover {
+  color: var(--accent);
+  background-color: transparent;
+  letter-spacing: 1px;
+  border-radius: 0px;
+  padding: 0px;
+  
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+html.theme-light .menu-flex a:hover {
+  color: var(--accent);
+  background-color: transparent;
+  letter-spacing: 1px;
+  border-radius: none;
+  padding: 0px;
+  text-decoration: none;
+  
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
 }
 
 /* --- Main Menu --- */
@@ -478,7 +605,88 @@ html.theme-dark textarea:hover, html.theme-dark textarea:focus {
   text-align: center;
   line-height: 200%;
   margin: 0;
-  border-bottom:outset 3px #445d5c;
+  border-bottom:outset 3px var(--accent);
+}
+
+/* ------------------------- 
+Hover Menu
+--------------------------- */
+
+.menu-flex {
+  background-color: var(--darkbg);
+  width: 5vw;
+  padding: 15px 15px 15px 15px;
+  line-height: 200%;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% calc(100% - 20px), 0% 100%, 0% 0%);
+  height: 8.5vh;
+  max-height: -moz-fit-content;
+  color: var(--white);
+  overflow: hidden;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 3%;
+  text-align: center;
+  transition: 1s ease-in-out;
+}
+
+.menu-flex:hover {
+  height: 30vh;
+  color: var(--white);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% calc(100% - 20px), 0% 100%, 0% 0%);
+  transition: 1s ease-in-out;
+}
+
+.menu-flex i {
+  display: block;
+  font-size: 1.3em;
+  background-color: transparent;
+}
+
+.menu-flex i:hover {
+  color: var(--accent);
+  background-color: transparent;
+  letter-spacing: 1px;
+  border-radius: none;
+  padding: 0px;
+  border: solid 0px transparent;
+  text-decoration: none;
+  text-shadow: 1px 1px var(--lightbg);
+  
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.menu-flex a:hover {
+  color: var(--accent);
+  background-color: transparent;
+  letter-spacing: 1px;
+  border-radius: none;
+  padding: 0px;
+  border: solid 0px transparent;
+  text-decoration: none;
+  
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.menu-flex a {
+  border-radius: none;
+  padding: 0px;
+  border: solid 0px transparent;
+  text-decoration: none;
+  
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
 }
 
 /* ------------------------
@@ -487,7 +695,7 @@ styles for the toggleable menu
 
 ------------------------ */
 
-.menutoggle #one {
+/* .menutoggle #one {
   box-sizing:border-box;
   display:block;
   transition:0.8s;
@@ -511,8 +719,11 @@ styles for the toggleable menu
 }
 
 .menu-flex a {
-  color: var(--text);
+  color: var(--white);
 	text-decoration: none;
+    border: none;
+    border-radius: 0px;
+    padding: 0px;
 	
 	-webkit-transition: all 1s ease;
 	-moz-transition: all 1s ease;
@@ -523,7 +734,7 @@ styles for the toggleable menu
 
 .menu-flex a:hover {
   color: #c1c1c1;
-	background-color: var(--main-bg);
+	background-color: var(--darkbg);
 	border-radius: 5px;
     padding: 3px;
 	text-decoration: none;
@@ -559,8 +770,8 @@ styles for the toggleable menu
 }
 
 #header:hover #zero {
-  color:var(--accent-bg);
-}
+  color:var(--dgrey);
+} */
 
 
 /* ------------------------
@@ -571,7 +782,7 @@ within the passage
 ------------------------ */
 
 .choices {
-  border-top: outset 1px #445d5c;
+  border-top: outset 1px var(--accent);
   padding:3em;
   margin-top:3em;
   text-align: left;
@@ -600,11 +811,11 @@ within the passage
 
 #ui-dialog {
   width: 50vw;
-  background-color: var(--body-bg);
+  background-color: var(--darkbg);
 }
 #ui-dialog-titlebar {
-  background-color: var(--body-bg);
-  border: 1px solid var(--accent-bg);
+  background-color: var(--darkbg);
+  border: 1px solid var(--dgrey);
 }
 #ui-dialog-title {
   font-family: var(--accent-font);
@@ -613,12 +824,12 @@ within the passage
   height: 100%;
 }
 #ui-dialog-body {
-  background-color: var(--body-bg);
-  border: 1px solid var(--accent-bg);
+  background-color: var(--darkbg);
+  border: 1px solid var(--dgrey);
   border-top: none;
 }
 #ui-dialog-body.saves tr:not(:first-child), #ui-dialog-body.saves > :not(:first-child) {
-  border-top: 1px solid var(--accent-bg);
+  border-top: 1px solid var(--dgrey);
 }
 
 /* MEDALLION POPUPS */
@@ -697,7 +908,7 @@ body.index .header__title {
 body.index .header__subtitle {
   margin: 0;
   font-size: 1.5em;
-  color: var(--hlink);
+  color: var(--white);
   font-family: var(--accent-font);
   font-weight: 500;
   line-height: 1.1;
@@ -738,8 +949,8 @@ Inner Card Content
 ----- */
 
 body.index .card:hover .card__inner {
-  background-color: var(--accent-bg);
-  color: var(--hlink);
+  background-color: var(--dgrey);
+  color: var(--white);
   transform: scale(1.05);
 }
 body.index .card__inner {
@@ -823,7 +1034,7 @@ body.index .card.is-expanded .card__inner {
   z-index: 1;
   
   background-color: var(--body-bg);
-  color: var(--text);
+  color: var(--white);
   letter-spacing: 1px;
   font-size: 1em;
 }
@@ -831,7 +1042,7 @@ body.index .card.is-expanded .card__inner {
 body.index .card.is-expanded .card__inner img {
   transition: all 0.3s ease-in-out;
   object-fit: cover;
-  border: 1px solid var(--accent-bg);
+  border: 1px solid var(--dgrey);
   border-radius: 10px;
   width: 10vw;
   height: 4.9in;
@@ -892,7 +1103,7 @@ body.index .card.is-inactive .card__inner {
   opacity: 0.5;
 }
 body.index .card.is-inactive:hover .card__inner {
-  background-color: var(--accent-bg);
+  background-color: var(--dgrey);
   transform: scale(1);
 }
 
@@ -1030,7 +1241,7 @@ stuff for the mobile header
     z-index: 2;
     border-top:0px solid transparent;
     margin-top:-40px;
-    border-bottom:1px solid var(--main-bg);
+    border-bottom:1px solid var(--darkbg);
     transition:0.8s ease;
   }
   #header:hover {
@@ -1114,7 +1325,7 @@ EFFECTS AND EXTRAS ARE FOUND BELOW
 /* EFFECT SCREENS */
 
 body.gscreen {
-	/* background-color: var(--accent-bg); */
+	/* background-color: var(--dgrey); */
   width: 100vw;
   height: 100vh;
   margin: 0;
@@ -1126,6 +1337,7 @@ body.gscreen {
   background: black;
   border: 1px solid transparent;
   border-radius: 10px;
+  outline: none;
   max-height: 80vh;
   min-height: 70vh;
   width: 100%;
@@ -1141,13 +1353,13 @@ body.gscreen {
 
 body.gscreen .passage {
 	background-color: transparent;
-    color: #c1c1c1;
+    color: var(--white);
 }
 
 body.gscreen .macro-type {
   	line-height: 3;
 	font-family: var(--accent-font);
-  	color: var(--hlink); 
+  	color: var(--white); 
 }
 
 body.gscreen .outer-container {
@@ -1207,8 +1419,11 @@ body.gscreen .content-start {
 /* Effect Screen Links */
 
 body.gscreen a {
-	color: var(--hlink);
+	color: var(--white);
 	text-decoration: none;
+    border: none;
+    border-radius: 0px;
+    padding: 0px;
 	
 	-webkit-transition: all 1s ease;
 	-moz-transition: all 1s ease;
@@ -1218,7 +1433,7 @@ body.gscreen a {
 }
 
 body.gscreen a:hover {
-	color: var(--hlink);
+	color: var(--white);
 	background-color: transparent;
     padding: 0px;
 	border: none;
@@ -1394,7 +1609,69 @@ body.gscreen a:hover {
   }
 }
 
-</style><script role="script" id="twine-user-script" type="text/twine-javascript">// for icons
+/* hovertip v2.0 - Start */
+
+.hoverTip {
+	display: inline-block;
+	top: 4px;
+	border-width: 0px;
+}
+.hoverTipTxt {
+	position: relative;
+	vertical-align: text-bottom;
+	line-height: initial;
+}
+.hoverTipTxt .hoverBox {
+	position: absolute;
+	visibility: hidden;
+}
+.hoverTipTxt:hover .hoverBox, .hoverTipTxt:focus .hoverBox {
+	visibility: visible;
+}
+.hoverBox {
+	padding: 3px 5px;
+	width: intrinsic;  /* Safari/WebKit uses a non-standard name */
+	width: -webkit-max-content;  /* Chrome */
+	width: -moz-max-content;  /* Firefox/Gecko */
+	width: max-content;
+	max-width: 330px;
+    font-size: .5em;
+	line-height: initial;
+	text-align: center;
+	color: var(--white);
+	background-color: var(--dgrey);
+	border: solid 2px var(--dgrey);
+    font-family: var(--body-font);
+  
+	-webkit-border-radius: 6px;
+	   -moz-border-radius: 6px;
+	        border-radius: 6px;
+	-webkit-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.75);
+	   -moz-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.75);
+	        box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.75);
+	z-index: 100;
+}
+.hoverTail::after {
+	content: "";
+	position: absolute;
+	top: 100%;  /* At the bottom of the tooltip */
+	left: 50%;
+	margin-left: -5px;
+	border-width: 8px;
+	border-style: solid;
+	border-color: var(--dgrey) transparent transparent transparent;
+	z-index: 100;
+}
+.hoverBox a {
+	-webkit-transition-duration: unset;
+	   -moz-transition-duration: unset;
+	     -o-transition-duration: unset;
+	        transition-duration: unset;
+}
+#ui-bar .hoverBox {
+	max-width: 230px;
+}
+/* hovertip v2.0 - End */</style><script role="script" id="twine-user-script" type="text/twine-javascript">// for icons
 importStyles('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
 Config.passages.descriptions = true;
@@ -1441,18 +1718,18 @@ importScripts (
 );
 
 // Setting up a list control for the settings property 'theme' w/ callbacks
-var settingThemeNames = ["Default", "Dark"];
+var settingThemeNames = ["Default", "Light"];
 var settingThemeHandler = function () {
 	// cache the jQuery-wrapped <html> element
 	var $html = $("html");
 
 	// remove any existing theme class
-	$html.removeClass("theme-dark");
+	$html.removeClass("theme-light");
 
 	// switch on the theme name to add the requested theme class
 	switch (settings.theme) {
-	case "Dark":
-		$html.addClass("theme-dark");
+	case "Light":
+		$html.addClass("theme-light");
 		break;
 	}
 };
@@ -1475,12 +1752,12 @@ var resizeFont = function() {
 	}
 	switch (settings.fontSize) {
 		case "Medium":
-			size.style.fontSize = "130%";
+			size.style.fontSize = "110%";
 			break;
 	}
 	switch (settings.fontSize) {
 		case "Large":
-			size.style.fontSize = "150%";
+			size.style.fontSize = "120%";
 			break;
 	}
 };
@@ -1615,7 +1892,133 @@ typing.forEach(type);
 // end fading-macro-set.min.js
 
 
-</script><tw-tag name="main-menu" color="none"></tw-tag><tw-tag name="autosave" color="green"></tw-tag><tw-tag name="ui" color="green"></tw-tag><tw-tag name="game-info" color="orange"></tw-tag><tw-tag name="code" color="red"></tw-tag><tw-tag name="choice" color="purple"></tw-tag><tw-tag name="gscreen" color="blue"></tw-tag><tw-tag name="index" color="blue"></tw-tag><tw-passagedata pid="1" name="Introduction" tags="choice" position="600,100" size="100,100">It was a cool spring morning, but even still, the rain came as a surprise. The skies had been clear, no rain clouds in sight, and the sun shone brilliantly enough to warm the chill in your bones.
+/* hovertip v2.0 - Start */
+window.UpdateHoverTipTxt = function (container) {
+	if (Engine.isIdle()) {
+		clearInterval(HTTIntervalID);
+		if (container === undefined) {
+			container = $(document);
+		} else {
+			container = $(container);
+		}
+		var i, id, top, left, parent, elementList, element, hoverPos, boxPos, zindex;
+		elementList = container.find('span[id^="hoverTipTxt"]');
+		for (i = 0; i < elementList.length; i++) {
+			element = $(elementList[i]);
+			id = elementList[i].id.substring(11);
+			/* Find parent hoverTip item on the page. */
+			parent = $(container).find("#hoverTip" + (id));
+			/* Position bottom of hoverTipTxt just above the parent. */
+			top = Math.round(-element.outerHeight() - 6);
+			/* Center hoverTipTxt horizontally over parent. */
+			left = Math.round((parent.outerWidth() - element.outerWidth()) / 2);
+			/* See if the hoverTip is contained by something with a higher z-index. */
+			zindex = element.css("z-index");
+			if (zindex === "auto") {
+				zindex = 0;
+			} else {
+				zindex = parseInt(zindex, 10);
+			}
+			while (parent.parent()[0] !== document) {
+				if ((parent.parent().css("z-index") !== "auto") && (parseInt(parent.parent().css("z-index"), 10) > zindex)) {
+					/* Get container rect. */
+					boxPos = parent[0].getBoundingClientRect();
+					break;
+				}
+				parent = parent.parent();
+			}
+			/* Update position. */
+			element.css({ top: top, left: left });
+			hoverPos = element[0].getBoundingClientRect();
+			/* Make sure the text isn't outside the bottom of the screen. */
+			if (hoverPos.top > window.innerHeight - hoverPos.height - 10) {
+				top -= hoverPos.top - (window.innerHeight - hoverPos.height - 10);
+			}
+			/* Make sure the text isn't outside the top of the screen. */
+			if (hoverPos.top < 4) {
+				top -= hoverPos.top - 4;
+			}
+			/* Make sure the text isn't outside the right of the screen. */
+			if (hoverPos.left > window.innerWidth - hoverPos.width - 26) {
+				left -= hoverPos.left - (window.innerWidth - hoverPos.width - 26);
+			}
+			/* Make sure the text isn't outside the left of the screen. */
+			if (hoverPos.left < 4) {
+				left -= hoverPos.left - 4;
+			}
+			/* Update position. */
+			element.css({ top: Math.round(top), left: Math.round(left) });
+			hoverPos = element[0].getBoundingClientRect();
+			if (boxPos) {  /* Fit within dialog boxes and the like. */
+				/* Make sure the text isn't outside the bottom of the box. */
+				if (hoverPos.top > boxPos.bottom - hoverPos.height - 10) {
+					top -= hoverPos.top - (boxPos.bottom - hoverPos.height - 10);
+				}
+				/* Make sure the text isn't outside the top of the box. */
+				if (hoverPos.top < boxPos.top + 4) {
+					top -= hoverPos.top - (boxPos.top + 4);
+				}
+				/* Make sure the text isn't outside the right of the box. */
+				if (hoverPos.left > boxPos.right - hoverPos.width - 26) {
+					left -= hoverPos.left - (boxPos.right - hoverPos.width - 26);
+				}
+				/* Make sure the text isn't outside the left of the box. */
+				if (hoverPos.left < boxPos.left + 4) {
+					left -= hoverPos.left - boxPos.left - 4;
+				}
+				/* Update position. */
+				element.css({ top: Math.round(top), left: Math.round(left) });
+			}
+		}
+	} else {
+		clearInterval(HTTIntervalID);
+		HTTIntervalID = setInterval(UpdateHoverTipTxt, 300);
+	}
+};
+/*  Waits for passage to be fully rendered before doing anything.  */
+var HTTIntervalID = 0;
+$(document).on(":passageend", function (ev) {
+	UpdateHoverTipTxt();
+});
+$(window).on("resize scroll", function (ev) {
+	clearInterval(HTTIntervalID);
+	HTTIntervalID = setInterval(UpdateHoverTipTxt, 300);
+});
+$("#ui-bar-toggle").on("click", function (ev) {
+	clearInterval(HTTIntervalID);
+	HTTIntervalID = setInterval(UpdateHoverTipTxt, 300);
+});
+/* <<hovertip>> macro */
+Macro.add("hovertip", {
+	tags	 : null,
+	handler  : function () {
+		if (this.args.length > 0) {
+			var mw = "";
+			if ((this.args.length > 1) && (!isNaN(parseInt(this.args[1], 10)))) {
+				mw = ' style="max-width: ' + parseInt(this.args[1], 10) + 'px;"';
+			}
+			if (State.temporary.HoverTipCount == undefined) {
+				State.temporary.HoverTipCount = 1;
+			} else {
+				State.temporary.HoverTipCount++;
+			}
+			while ($("#hoverTip" + State.temporary.HoverTipCount).length) {
+				/* Found an existing hoverTip. */
+				State.temporary.HoverTipCount++;
+			}
+			var output = '<span id="hoverTip' + State.temporary.HoverTipCount +
+					'" class="hoverTipTxt hoverTip" tabindex="0" ' +
+					'onmouseenter="UpdateHoverTipTxt();">' +
+					this.payload[0].contents + '<span id="hoverTipTxt' +
+					State.temporary.HoverTipCount + '" class="hoverBox hoverTail"' +
+					mw + '>' + this.args[0] + '</span></span>';
+			$(this.output).wiki(output);
+		} else {
+			$(this.output).wiki(this.payload[0].contents);
+		}
+	}
+});
+/* hovertip v2.0 - End */</script><tw-tag name="main-menu" color="none"></tw-tag><tw-tag name="autosave" color="green"></tw-tag><tw-tag name="ui" color="green"></tw-tag><tw-tag name="game-info" color="orange"></tw-tag><tw-tag name="code" color="red"></tw-tag><tw-tag name="choice" color="purple"></tw-tag><tw-tag name="gscreen" color="blue"></tw-tag><tw-tag name="index" color="blue"></tw-tag><tw-passagedata pid="1" name="Introduction" tags="choice" position="600,100" size="100,100">It was a cool spring morning, but even still, the rain came as a surprise. The skies had been clear, no rain clouds in sight, and the sun shone brilliantly enough to warm the chill in your bones.
 
 But then the fog rolled in, clawing its way around the old brick buildings and down the worn streets that made up the downtown area. Grey clouds followed them, crawling overhead and bringing with it a freezing mist of rain.
 Were it not cold enough to feel like razors against your exposed skin, it might not have been so bad.
@@ -1733,6 +2136,19 @@ When you do, you suddenly remember you&#39;re in a curiosity shop.
 &lt;&lt;set $theirs = &quot;&quot;&gt;&gt;
 
 &lt;&lt;set $combat to &quot;&quot;&gt;&gt;
+
+/* EXTRA FAE ATTRIBUTES */
+
+&lt;&lt;set $horns to &quot;&quot;&gt;&gt;
+&lt;&lt;set $marks to &quot;&quot;&gt;&gt;
+&lt;&lt;set $integuments to &quot;&quot;&gt;&gt;
+
+&lt;&lt;set $flowerhair to false&gt;&gt;
+&lt;&lt;set $glitterskin to false&gt;&gt;
+&lt;&lt;set $fangies to false&gt;&gt;
+
+&lt;&lt;set $wings to false&gt;&gt;
+&lt;&lt;set $wingtype to &quot;&quot;&gt;&gt;
 
 /* ROMANCE OPTIONS ATTRIBUTES */
 
@@ -1927,7 +2343,7 @@ Break the Chains. Unite the    @@.blurrier;pe o pl e o  f -- -     -@@
 		&lt;br&gt;&lt;&lt;button &quot;Yes.&quot;&gt;&gt;&lt;&lt;dialogclose&gt;&gt;&lt;&lt;/button&gt;&gt;
 		&lt;&lt;button &quot;On second thought...&quot;&gt;&gt;&lt;&lt;dialogclose&gt;&gt;&lt;&lt;/button&gt;&gt;
 	&lt;&lt;/dialog&gt;&gt;
-&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="23" name="Widgets" tags="widget" position="100,300" size="100,100">&lt;&lt;widget &quot;eyecolour&quot;&gt;&gt;&lt;&lt;print $eyecolour.toLowerCase()&gt;&gt;&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="Code Refs [For Me]" tags="" position="100,400" size="100,100">/* DIALOG MACRO
+&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="23" name="Widgets" tags="widget nobr" position="100,300" size="100,100">&lt;&lt;widget &quot;eyecolour&quot;&gt;&gt;&lt;&lt;print $eyecolour.toLowerCase()&gt;&gt;&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="Code Refs [For Me]" tags="" position="100,400" size="100,100">/* DIALOG MACRO
 
 /% creates a link that opens a dialog box called &#39;Character Sheet&#39; with the classes .char-sheet and .stats %/
 &lt;&lt;link &#39;View Character Sheet&#39;&gt;&gt;
@@ -2122,7 +2538,7 @@ h1 {text-align: center; margin-top: 25vh;}
  
     &lt;div id=&quot;container&quot;&gt;
     &lt;div id=&quot;header&quot;&gt;
-    &lt;span id=&quot;header-text&quot; onclick=&quot;toggle(this)&quot; style=&quot;position:relative; z-index: 250; cursor:crosshair;&quot;&gt;&lt;/span&gt; &lt;div class=&quot;menutoggle&quot;&gt;&lt;span id=&quot;zero&quot; onclick=&quot;toggle(this)&quot; style=&quot;position:relative; z-index: 250;&quot;&gt;&lt;i class=&quot;fa-solid fa-bars fa-lg&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; &lt;/span&gt; &lt;span id=&quot;one&quot; style=&quot;top: -100px;&quot;&gt;
+    &lt;span id=&quot;header-text&quot; onclick=&quot;toggle(this)&quot; style=&quot;position:relative; z-index: 250;&quot;&gt;&lt;/span&gt; &lt;div class=&quot;menutoggle&quot;&gt; &lt;span id=&quot;one&quot; style=&quot;top: -100px;&quot;&gt;
     &lt;div class=&quot;menu-flex&quot;&gt;
     &lt;/div&gt;
     &lt;/span&gt;&lt;/div&gt;
@@ -2135,6 +2551,7 @@ h1 {text-align: center; margin-top: 25vh;}
     &lt;/div&gt;
 
     &lt;/div&gt;
+    
     &lt;!-- im v bad at javascript dont judge me too hard --&gt;
     &lt;script&gt;function toggle() {
   var x = document.getElementById(&quot;one&quot;);
@@ -2156,7 +2573,17 @@ h1 {text-align: center; margin-top: 25vh;}
     });
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="30" name="PassageDone" tags="" position="0,100" size="100,100">&lt;!-- storyinterface doesn&#39;t let you code variables in, so this is how u cheat the system --&gt;
     &lt;&lt;replace &quot;.menu-flex&quot;&gt;&gt;&lt;&lt;include &quot;menu-flex&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
-    &lt;&lt;replace &quot;#header-text&quot;&gt;&gt;&lt;&lt;include &quot;header-text&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="menu-flex" tags="nobr" position="200,100" size="100,100">&lt;&lt;link &#39;&lt;div class=&quot;menu-item&quot;&gt;Go Back&lt;/div&gt;&#39;&gt;&gt;&lt;&lt;run Engine.backward()&gt;&gt;&lt;&lt;/link&gt;&gt;
+    &lt;&lt;replace &quot;#header-text&quot;&gt;&gt;&lt;&lt;include &quot;header-text&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="menu-flex" tags="nobr" position="200,100" size="100,100">&lt;div class=&quot;menu-hover&quot;&gt;
+  &lt;&lt;hovertip &#39;settings&#39;&gt;&gt;&lt;&lt;link &#39;&lt;i class=&quot;fa fa-gears&quot;&gt;&lt;/i&gt;&#39;&gt;&gt;&lt;&lt;script&gt;&gt;UI.settings()&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/hovertip&gt;&gt;&lt;br&gt; 
+  &lt;&lt;hovertip &#39;character&#39;&gt;&gt;&lt;&lt;link &#39;&lt;i class=&quot;fa fa-address-card&quot;&gt;&lt;/i&gt;&#39; &#39;Character&#39;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/hovertip&gt;&gt;&lt;br&gt;
+  &lt;&lt;hovertip &#39;codex&#39;&gt;&gt;&lt;&lt;link &#39;&lt;i class=&quot;fa fa-book-bookmark&quot;&gt;&lt;/i&gt;&#39; &#39;Codex&#39;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/hovertip&gt;&gt;&lt;br&gt;
+  &lt;&lt;hovertip &#39;saves&#39;&gt;&gt;&lt;&lt;link &#39;&lt;i class=&quot;fa fa-floppy-disk&quot;&gt;&lt;/i&gt;&#39;&gt;&gt;&lt;&lt;script&gt;&gt;UI.saves()&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/hovertip&gt;&gt;&lt;br&gt;
+  &lt;&lt;hovertip &#39;back&#39;&gt;&gt;&lt;&lt;link &#39;&lt;i class=&quot;fa fa-angle-left&quot;&gt;&lt;/i&gt;&#39;&gt;&gt;&lt;&lt;run Engine.backward()&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/hovertip&gt;&gt;&lt;br&gt;
+  &lt;&lt;hovertip &#39;restart&#39;&gt;&gt;&lt;&lt;link &#39;&lt;i class=&quot;fa fa-angles-left&quot;&gt;&lt;/i&gt;&#39;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/hovertip&gt;&gt;&lt;br&gt;
+&lt;/div&gt;
+
+&lt;!-- TOGGLE HEADER 
+ &lt;&lt;link &#39;&lt;div class=&quot;menu-item&quot;&gt;Go Back&lt;/div&gt;&#39;&gt;&gt;&lt;&lt;run Engine.backward()&gt;&gt;&lt;&lt;/link&gt;&gt;
 
     &lt;&lt;link &#39;&lt;div class=&quot;menu-item&quot;&gt;Settings&lt;/div&gt;&#39;&gt;&gt;&lt;&lt;script&gt;&gt;UI.settings()&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;
 
@@ -2166,7 +2593,7 @@ h1 {text-align: center; margin-top: 25vh;}
 
     &lt;&lt;link &#39;&lt;div class=&quot;menu-item&quot;&gt;Saves&lt;/div&gt;&#39;&gt;&gt;&lt;&lt;script&gt;&gt;UI.saves()&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;
     
-    &lt;&lt;link &#39;&lt;div class=&quot;menu-item&quot;&gt;Restart&lt;/div&gt;&#39;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="header-text" tags="" position="300,100" size="100,100">$gamechapter</tw-passagedata><tw-passagedata pid="33" name="Gold Backup" tags="nobr choice" position="750,600" size="100,100">&lt;div class=&quot;imgL&quot;&gt;
+    &lt;&lt;link &#39;&lt;div class=&quot;menu-item&quot;&gt;Restart&lt;/div&gt;&#39;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt; --&gt;</tw-passagedata><tw-passagedata pid="32" name="header-text" tags="" position="300,100" size="100,100">$gamechapter</tw-passagedata><tw-passagedata pid="33" name="Gold Backup" tags="nobr choice" position="750,600" size="100,100">&lt;div class=&quot;imgL&quot;&gt;
 	&lt;img class=&quot;responsive-image&quot; @src=&quot;setup.ImagePath + &#39;medalliontest.png&#39;&quot;&gt;
 &lt;/div&gt;
 
@@ -2249,7 +2676,7 @@ When an important decision appears, you will be notified.
 
 Choose wisely.
 
-&lt;&lt;button [[Confirm.|[Warning] Gender]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="[Warning] Gender" tags="" position="500,300" size="100,100">&lt;h2&gt;PLEASE NOTE:&lt;/h2&gt;
+&lt;&lt;button [[Confirm|[Warning] Gender]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="[Warning] Gender" tags="" position="500,300" size="100,100">&lt;h2&gt;PLEASE NOTE:&lt;/h2&gt;
 Most of the romance options are gender selectable. However, please keep in mind that the fae of this world view sex and gender differently than we might, especially considering many fae are (what we would consider) intersex.
 
 Because of this, the appearance of some ROs will have a more subtle change than others.
@@ -2259,7 +2686,7 @@ If sexual content is enabled (for those 18+), an RO&#39;s selected gender will a
 
 If you&#39;d like to know how the gender options affect each character, please check [this page]!
 
-&lt;&lt;button [[Confirm.|Introduction]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="NPCs" tags="index nobr" position="300,400" size="100,100">&lt;div class=&quot;wrapper&quot;&gt;
+&lt;&lt;button [[Confirm|Introduction]]&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="NPCs" tags="index nobr" position="300,400" size="100,100">&lt;div class=&quot;wrapper&quot;&gt;
 &lt;div class=&quot;header&quot;&gt;
     &lt;h1 class=&quot;header__title&quot;&gt;Character Codex&lt;/h1&gt;
     &lt;h2 class=&quot;header__subtitle&quot;&gt;beep boop&lt;/h2&gt;
@@ -2501,19 +2928,19 @@ Does this sound correct?
 &lt;div class=&quot;choices&quot;&gt;&lt;&lt;if $faefeature !== 2&gt;&gt;&lt;&lt;link [[Yes, but there&#39;s more...|Fae Characteristics]]&gt;&gt;&lt;&lt;set $faefeature += 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;link [[Yes, that&#39;s it.|Next]]&gt;&gt;&lt;&lt;set $faefeature += 1&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;link [[No, let me look again.|Fae Characteristics]]&gt;&gt;&lt;&lt;unset $eyecolour, $ectype, $eyextra, $pupils, $eyeflecks, $eyeglow&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="43" name="FaeCC-eyes" tags="nobr" position="800,1000" size="100,100">&lt;&lt;set _ecvalue to false&gt;&gt;
-Their colour is...
-		&lt;br&gt;&lt;label&gt;&lt;&lt;radiobutton &quot;$ectype&quot; &quot;ec-same&quot; checked&gt;&gt; &amp;nbsp;the same as usual.&lt;&lt;update&gt;&gt;&lt;/label&gt;
-		&lt;br&gt;&lt;label&gt;&lt;&lt;radiobutton &quot;$ectype&quot; &quot;ec-diff&quot;&gt;&gt; &amp;nbsp;different than usual.&lt;&lt;update&gt;&gt;&lt;/label&gt;
-		&lt;br&gt;&lt;label&gt;&lt;&lt;radiobutton &quot;$ectype&quot; &quot;ec-solid&quot;&gt;&gt; &amp;nbsp;one solid colour.&lt;&lt;update&gt;&gt;&lt;/label&gt;
-       &lt;br&gt;&lt;&lt;link &quot;&lt;span style=&#39;color: var(--hlink); background-color: var(--accent-bg); border-radius: 5px; padding: 3px; margin-left:2em;&#39;&gt;Select &lt;i class=&#39;fa fa-angles-right&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt;&lt;/span&gt;&quot;&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;replace &quot;#ec-choices&quot;&gt;&gt;&lt;&lt;include &quot;ec-listbox&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;
-        &lt;&lt;liveblock&gt;&gt;&lt;&lt;if _ecvalue is true&gt;&gt;
-        &lt;br&gt;Your eyes are &lt;&lt;eyecolour&gt;&gt;, which are &lt;&lt;if $ectype is &quot;ec-diff&quot;&gt;&gt;a different colour than usual&lt;&lt;elseif $ectype is &quot;ec-solid&quot;&gt;&gt;a completely solid colour&lt;&lt;else&gt;&gt;the same as usual&lt;&lt;/if&gt;&gt;.
-        &lt;&lt;else&gt;&gt;
-        &lt;&lt;/if&gt;&gt;&lt;&lt;/liveblock&gt;&gt;
-      &lt;div id=&quot;ec-choices&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;choices&quot;&gt;
-        &lt;&lt;link [[✦ Confirm choice?|FaeCC-eyes2]]&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;/link&gt;&gt;
-        &lt;/div&gt;</tw-passagedata><tw-passagedata pid="44" name="FaeCC-eyes2" tags="" position="800,1100" size="100,100">&lt;&lt;liveblock&gt;&gt;Your eyes are &lt;&lt;eyecolour&gt;&gt;, which are &lt;&lt;if $ectype is &quot;ec-diff&quot;&gt;&gt;a different colour than usual&lt;&lt;elseif $ectype is &quot;ec-solid&quot;&gt;&gt;a completely solid colour&lt;&lt;else&gt;&gt;the same as usual&lt;&lt;/if&gt;&gt;.&lt;&lt;/liveblock&gt;&gt;
+    Their colour is...
+            &lt;br&gt;&lt;label&gt;&lt;&lt;radiobutton &quot;$ectype&quot; &quot;ec-same&quot; checked&gt;&gt; &amp;nbsp;the same as usual.&lt;&lt;update&gt;&gt;&lt;/label&gt;
+            &lt;br&gt;&lt;label&gt;&lt;&lt;radiobutton &quot;$ectype&quot; &quot;ec-diff&quot;&gt;&gt; &amp;nbsp;different than usual.&lt;&lt;update&gt;&gt;&lt;/label&gt;
+            &lt;br&gt;&lt;label&gt;&lt;&lt;radiobutton &quot;$ectype&quot; &quot;ec-solid&quot;&gt;&gt; &amp;nbsp;one solid colour.&lt;&lt;update&gt;&gt;&lt;/label&gt;
+           &lt;br&gt;&lt;&lt;link &quot;Select &lt;i class=&#39;fa fa-angles-right&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt;&quot;&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;replace &quot;#ec-choices&quot;&gt;&gt;&lt;&lt;include &quot;ec-listbox&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;
+            &lt;&lt;liveblock&gt;&gt;&lt;&lt;if _ecvalue is true&gt;&gt;
+            &lt;br&gt;Your eyes are &lt;&lt;eyecolour&gt;&gt;, which are &lt;&lt;if $ectype is &quot;ec-diff&quot;&gt;&gt;a different colour than usual&lt;&lt;elseif $ectype is &quot;ec-solid&quot;&gt;&gt;a completely solid colour&lt;&lt;else&gt;&gt;the same as usual&lt;&lt;/if&gt;&gt;.
+            &lt;&lt;else&gt;&gt;
+            &lt;&lt;/if&gt;&gt;&lt;&lt;/liveblock&gt;&gt;
+          &lt;div id=&quot;ec-choices&quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;choices&quot;&gt;
+            &lt;&lt;link [[✦ Confirm choice?|FaeCC-eyes2]]&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;/link&gt;&gt;
+            &lt;/div&gt;</tw-passagedata><tw-passagedata pid="44" name="FaeCC-eyes2" tags="" position="800,1100" size="100,100">&lt;&lt;liveblock&gt;&gt;Your eyes are &lt;&lt;eyecolour&gt;&gt;, which are &lt;&lt;if $ectype is &quot;ec-diff&quot;&gt;&gt;a different colour than usual&lt;&lt;elseif $ectype is &quot;ec-solid&quot;&gt;&gt;a completely solid colour&lt;&lt;else&gt;&gt;the same as usual&lt;&lt;/if&gt;&gt;.&lt;&lt;/liveblock&gt;&gt;
 
 Upon a closer inspection, do your eyes have any other interesting features?
 
@@ -2521,7 +2948,7 @@ Upon a closer inspection, do your eyes have any other interesting features?
 &lt;&lt;link &quot;&lt;i class=&#39;fa fa-eye-slash&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt; No.&quot; &quot;FaeCC-eyesEND&quot;&gt;&gt;&lt;&lt;set $eyextra to false&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/liveblock&gt;&gt;
 
 &lt;&lt;link &quot;&lt;span&gt;&lt;i class=&#39;fa fa-angles-right&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt;&lt;/span&gt;&quot;&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;replace &quot;#ec-choices&quot;&gt;&gt;&lt;&lt;include &quot;ec-xtras&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;div id=&quot;ec-choices&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="45" name="FaeCC-horns" tags="nobr" position="925,1000" size="100,100">Sprouting from your head are...
+&lt;div id=&quot;ec-choices&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="45" name="FaeCC-horns" tags="nobr choice" position="925,1000" size="100,100">Sprouting from your head are...
 &lt;br&gt;
 &lt;&lt;liveblock&gt;&gt;
      &lt;&lt;if _hornsvalue is true&gt;&gt;
@@ -2531,15 +2958,30 @@ Upon a closer inspection, do your eyes have any other interesting features?
 &lt;&lt;/liveblock&gt;&gt;
 &lt;br&gt;
 &lt;&lt;link &quot;&lt;i class=&#39;fa fa-genderless fa-sm&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt; small, pointed horns sprouting from my forehead.&quot;&gt;&gt;&lt;&lt;set $horns to &quot;hrn1&quot;&gt;&gt;&lt;&lt;set _hornsvalue to true&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;br&gt;&lt;&lt;link &quot;&lt;i class=&#39;fa fa-genderless fa-sm&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt; small, pointed horns sprouting from my forehead.&quot;&gt;&gt;&lt;&lt;set $horns to &quot;hrn2&quot;&gt;&gt;&lt;&lt;set _hornsvalue to true&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;br&gt;&lt;&lt;link &quot;&lt;i class=&#39;fa fa-genderless fa-sm&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt; small, pointed horns sprouting from my forehead.&quot;&gt;&gt;&lt;&lt;set $horns to &quot;atl1&quot;&gt;&gt;&lt;&lt;set _hornsvalue to true&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;br&gt;&lt;&lt;link &quot;&lt;i class=&#39;fa fa-genderless fa-sm&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt; small, pointed horns sprouting from my forehead.&quot;&gt;&gt;&lt;&lt;set $horns to &quot;atl2&quot;&gt;&gt;&lt;&lt;set _hornsvalue to true&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;br&gt;&lt;&lt;link &quot;&lt;i class=&#39;fa fa-genderless fa-sm&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt; small, pointed horns sprouting from my forehead.&quot;&gt;&gt;&lt;&lt;set $horns to &quot;ant1&quot;&gt;&gt;&lt;&lt;set _hornsvalue to true&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;br&gt;&lt;&lt;link &quot;&lt;i class=&#39;fa fa-genderless fa-sm&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt; small horns curling from the side of my head in a tight spiral, nearly covering my ears.&quot;&gt;&gt;&lt;&lt;set $horns to &quot;hrn2&quot;&gt;&gt;&lt;&lt;set _hornsvalue to true&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;br&gt;&lt;&lt;link &quot;&lt;i class=&#39;fa fa-genderless fa-sm&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt; short two-prong antlers sprouting from my forehead, with a soft coat of velvet.&quot;&gt;&gt;&lt;&lt;set $horns to &quot;atl1&quot;&gt;&gt;&lt;&lt;set _hornsvalue to true&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;br&gt;&lt;&lt;link &quot;&lt;i class=&#39;fa fa-genderless fa-sm&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt; short three-prong antlers that curve away from the sides of my head, smooth and free of velvet.&quot;&gt;&gt;&lt;&lt;set $horns to &quot;atl2&quot;&gt;&gt;&lt;&lt;set _hornsvalue to true&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;br&gt;&lt;&lt;link &quot;&lt;i class=&#39;fa fa-genderless fa-sm&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt; (insect-related?)&quot;&gt;&gt;&lt;&lt;set $horns to &quot;ant1&quot;&gt;&gt;&lt;&lt;set _hornsvalue to true&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;br&gt;
 &lt;&lt;liveblock&gt;&gt;
 &lt;&lt;if _hornsvalue is true&gt;&gt;&lt;div class=&quot;choices&quot;&gt;&lt;&lt;if $faefeature !== 2&gt;&gt;&lt;&lt;link [[Yes, but there&#39;s more...|Fae Characteristics]]&gt;&gt;&lt;&lt;set $faefeature += 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/if&gt;&gt;
-&lt;br&gt;&lt;&lt;link [[Yes, that&#39;s it.|Next]]&gt;&gt;&lt;&lt;set $faefeature += 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/liveblock&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="Next" tags="" position="800,1350" size="100,100">[[Introduction]]</tw-passagedata><tw-passagedata pid="47" name="FaeCC-marks" tags="" position="925,1100" size="100,100">&lt;div class=&quot;choices&quot;&gt;&lt;&lt;if $faefeature !== 2&gt;&gt;&lt;&lt;link [[Yes, but there&#39;s more...|Fae Characteristics]]&gt;&gt;&lt;&lt;set $faefeature += 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;link [[Yes, that&#39;s it.|Next]]&gt;&gt;&lt;&lt;set $faefeature += 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="48" name="FaeCC-body" tags="" position="925,1200" size="100,100">&lt;div class=&quot;choices&quot;&gt;&lt;&lt;if $faefeature !== 2&gt;&gt;&lt;&lt;link [[Yes, but there&#39;s more...|Fae Characteristics]]&gt;&gt;&lt;&lt;set $faefeature += 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;br&gt;&lt;&lt;link [[Yes, that&#39;s it.|Next]]&gt;&gt;&lt;&lt;set $faefeature += 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/liveblock&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="Next" tags="" position="800,1350" size="100,100">[[Introduction]]</tw-passagedata><tw-passagedata pid="47" name="FaeCC-marks" tags="nobr choice" position="925,1100" size="100,100">Tattoo-like markings are visible across your skin.
+&lt;br&gt;
+&lt;&lt;liveblock&gt;&gt;
+     &lt;&lt;if _marksvalue is true&gt;&gt;
+        &lt;br&gt;$marks
+      &lt;&lt;else&gt;&gt;
+      &lt;&lt;/if&gt;&gt;
+&lt;&lt;/liveblock&gt;&gt;
+&lt;br&gt;
+&lt;&lt;link &quot;&lt;i class=&#39;fa fa-genderless fa-sm&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt; The markings take the form of writing inked across your skin, the unfamiliar script running down your neck, chest, and arms.&quot;&gt;&gt;&lt;&lt;set $marks to &quot;mark1&quot;&gt;&gt;&lt;&lt;set _marksvalue to true&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;br&gt;&lt;&lt;link &quot;&lt;i class=&#39;fa fa-genderless fa-sm&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt; A wash of swirling ink that spreads across your chest and down your arms, a galaxy of twinkling stars against your skin.&quot;&gt;&gt;&lt;&lt;set $marks to &quot;mark2&quot;&gt;&gt;&lt;&lt;set _marksvalue to true&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;br&gt;&lt;&lt;link &quot;&lt;i class=&#39;fa fa-genderless fa-sm&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt; Geometric shapes cover your arms and disappear into your clothing, the slow shifting of the patterns almost mesmerizing. A glance down tells you your legs have similar designs, the markings extending down your body.&quot;&gt;&gt;&lt;&lt;set $marks to &quot;mark3&quot;&gt;&gt;&lt;&lt;set _marksvalue to true&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;br&gt;&lt;&lt;link &quot;&lt;i class=&#39;fa fa-genderless fa-sm&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt; Swirling designs mark your face and hands, both the shapes and thickness of the lines shifting, giving the illusion that the designs shine against your skin.&quot;&gt;&gt;&lt;&lt;set $marks to &quot;mark4&quot;&gt;&gt;&lt;&lt;set _marksvalue to true&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;br&gt;
+&lt;&lt;liveblock&gt;&gt;
+&lt;&lt;if _marksvalue is true&gt;&gt;&lt;div class=&quot;choices&quot;&gt;&lt;&lt;if $faefeature !== 2&gt;&gt;&lt;&lt;link [[Yes, but there&#39;s more...|Fae Characteristics]]&gt;&gt;&lt;&lt;set $faefeature += 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;link [[Yes, that&#39;s it.|Next]]&gt;&gt;&lt;&lt;set $faefeature += 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/liveblock&gt;&gt;</tw-passagedata><tw-passagedata pid="48" name="FaeCC-body" tags="choice" position="925,1200" size="100,100">&lt;div class=&quot;choices&quot;&gt;&lt;&lt;if $faefeature !== 2&gt;&gt;&lt;&lt;link [[Yes, but there&#39;s more...|Fae Characteristics]]&gt;&gt;&lt;&lt;set $faefeature += 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;link [[Yes, that&#39;s it.|Next]]&gt;&gt;&lt;&lt;set $faefeature += 1&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="49" name="MoonstonePathStart" tags="nobr title gscreen" position="1100,475" size="100,100">&lt;style&gt; #header { display: none; } &lt;/style&gt;
 
 &lt;div class=&quot;outer-container&quot;&gt;
