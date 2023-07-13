@@ -155,7 +155,8 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
   --white: #c1c1c1;
   --dgrey: #333333;
   /* --accent: #8395ba; */
-  --accent: #393756; /* purple */
+  /*--accent: #393756;  purple */
+  --accent: #434166;
   --bluegreen: #2b4646;
 }
 
@@ -221,28 +222,29 @@ a {
 	color: var(--bluegreen);
 	text-decoration: none;
     border-radius: 10px;
-    padding: 3px;
+    padding: 5px;
 	
-	-webkit-transition: all 1s ease;
-	-moz-transition: all 1s ease;
-	-ms-transition: all 1s ease;
-	-o-transition: all 1s ease;
-	transition: all 1s ease;
+	-webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-ms-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
 }
 
 a:hover {
 	color: var(--accent);
-	background-color: var(--lightbg);
+	/*background-color: rgba(214,210,207,.03);*/
 	border-radius: 10px;
-    padding: 3px;
+    padding: 5px;
 	text-decoration: none;
     letter-spacing: 2px;
+    transform: scale(1.3);
 	
-	-webkit-transition: all 0.5s ease;
-	-moz-transition: all 0.5s ease;
-	-ms-transition: all 0.5s ease;
-	-o-transition: all 0.5s ease;
-	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
 }
 
 /* Link Shine Effect */
@@ -393,15 +395,61 @@ main game content appears
   font-size: 1.1em;
 }
 
-body.choice .passage a:before {
+/* "choice" tag */
+body.choice .passage a::before {
     content: "✦ ";
+    color: var(--bluegreen);
 }
+body.choice .passage a:hover::before {
+    color: var(--white);
+}
+
 body.choice .passage a {
-    letter-spacing: 1px;
+  color: var(--white);
+  letter-spacing: 1px;
+}
+body.choice .passage a:hover {
+  transition: 0.5s ease-in-out;
+  color: var(--accent);
+  transform: none;
+  font-weight: normal;
 }
 
 #textbox-error {
 }
+
+/* ------------------------
+
+styles for the choices selections
+within the passage
+
+------------------------ */
+
+.choices {
+  border-top: outset 1px var(--accent);
+  padding:3em;
+  margin-top:3em;
+  text-align: left;
+}
+
+/* .choice-item {
+  transition:0.4s;
+  cursor:pointer;
+  font-family:var(--monofont);
+  letter-spacing:0.1em;
+}
+
+.choice-item::before {
+  content: '\f124';
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size:0.7em;
+  margin-right:1em;
+}
+
+.choice-item:hover {
+  color:var(--accent);
+  text-shadow: 1px 0px var(--accent);
+} */
 
 /* Buttons */
 
@@ -409,30 +457,30 @@ button {
   background-color: var(--dgrey);
   border-radius: 10px;
   border: solid 1px transparent;
-  padding: 3px;
+  padding: 5px;
   font-family: var(--accent-font);
   color: var(--white);
   
-  -webkit-transition: all 0.5s ease;
-	-moz-transition: all 0.5s ease;
-	-ms-transition: all 0.5s ease;
-	-o-transition: all 0.5s ease;
-	transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
 }
 button:hover {
   background-color: var(--lightbg);
   border-radius: 10px;
   border: solid 1px transparent;
-  padding: 3px;
+  padding: 5px;
   color: var(--accent);
   text-decoration: none;
   letter-spacing: 2px;
   
-  -webkit-transition: all 0.5s ease;
-	-moz-transition: all 0.5s ease;
-	-ms-transition: all 0.5s ease;
-	-o-transition: all 0.5s ease;
-	transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
 }
 button:disabled {
   background-color: transparent;
@@ -443,151 +491,36 @@ button:disabled {
 
 input, select, textarea {
   color: var(--white);
-  border: 1px solid var(--dgrey);
-  background-color: var(--darkbg);
+  border: 1px solid var(--bluegreen);
+  background-color: var(--dgrey);
   font-family: var(--accent-font);
   border-radius: 5px;
   padding: 5px;
 }
 
 select:hover, select:focus {
-  background-color: var(--darkbg);
-  border-color: var(--dgrey);
+  background-color: var(--dgrey);
+  border-color: var(--accent);
   font-family: var(--accent-font);
-  color: var(--accent);
+  color: var(--white);
   border-radius: 5px;
   padding: 5px;
 }
 input:hover, input:focus {
-  background-color: var(--darkbg);
-  border-color: var(--dgrey);
+  background-color: var(--dgrey);
+  border-color: var(--accent);
   font-family: var(--accent-font);
-  color: var(--accent);
+  color: var(--white);
   border-radius: 5px;
   padding: 5px;
 }
 textarea:hover, textarea:focus {
-  background-color: var(--darkbg);
-  border-color: var(--dgrey);
+  background-color: var(--dgrey);
+  border-color: var(--accent);
   font-family: var(--accent-font);
-  color: var(--accent);
+  color: var(--white);
   border-radius: 5px;
   padding: 5px;
-}
-
-/* --- Different Theme Settings --- */
-
-/* DARK THEME */
-
-html.theme-light body {
-    color: var(--dgrey);
-	background-color: var(--lightbg);
-}
-
-html.theme-light #passages {
-    color: var(--dgrey);
-	background-color: var(--lightbg);
-    border: 10px solid var(--lightbg);
-    outline: 2px solid var(--dgrey);
-}
-html.theme-light a {
-	color: var(--dgrey);
-}
-html.theme-light a:hover {
-	color: var(--accent);
-	background-color: var(--white);
-}
-
-html.theme-light button {
-  border: solid 1.3px var(--white);
-  color: var(--dgrey);
-}
-html.theme-light button:hover {
-  background-color: var(--white);
-  border: solid 1.3px var(--white);
-  color: var(--accent);
-}
-html.theme-light #ui-dialog {
-  background-color: var(--lightbg);
-}
-html.theme-light #ui-dialog-titlebar {
-  background-color: var(--lightbg);
-  border: 1px solid var(--accent);
-}
-html.theme-light #ui-dialog-body {
-  background-color: var(--lightbg);
-  border: 1px solid var(--accent);
-}
-
-html.theme-light input, select, textarea {
-  color: var(--dgrey);
-  border: 1px solid var(--accent);
-  background-color: var(--lightbg);
-  font-family: var(--accent-font);
-  border-radius: 5px;
-  font-family: var(--accent-font);
-  border-radius: 5px;
-  padding: 5px;
-}
-
-html.theme-light select:hover, html.theme-dark select:focus {
-  background-color: var(--lightbg);
-  border-color: var(--white);
-  font-family: var(--accent-font);
-  border-radius: 5px;
-  padding: 5px;
-}
-html.theme-light input:hover, html.theme-dark input:focus {
-  background-color: var(--lightbg);
-  border-color: var(--white);
-  font-family: var(--accent-font);
-  border-radius: 5px;
-  padding: 5px;
-}
-html.theme-light textarea:hover, html.theme-dark textarea:focus {
-  background-color: var(--lightbg);
-  border-color: var(--white);
-  font-family: var(--accent-font);
-  border-radius: 5px;
-  padding: 5px;
-}
-
-html.theme-light .menu-flex {
-  background-color: var(--lightbg);
-  color: var(--dgrey);
-}
-
-html.theme-light .menu-flex:hover {
-  color: var(--accent);
-}
-
-html.theme-light .menu-flex i:hover {
-  color: var(--accent);
-  background-color: transparent;
-  letter-spacing: 1px;
-  border-radius: 0px;
-  padding: 0px;
-  
-  -webkit-transition: none;
-  -moz-transition: none;
-  -ms-transition: none;
-  -o-transition: none;
-  transition: none;
-}
-
-html.theme-light .menu-flex a:hover {
-  color: var(--accent);
-  background-color: transparent;
-  letter-spacing: 1px;
-  border-radius: none;
-  padding: 0px;
-  text-decoration: none;
-  
-  -webkit-transition: none;
-  -moz-transition: none;
-  -ms-transition: none;
-  -o-transition: none;
-  transition: none;
 }
 
 /* --- Main Menu --- */
@@ -613,81 +546,81 @@ Hover Menu
 --------------------------- */
 
 .menu-flex {
-  background-color: var(--darkbg);
-  width: 5vw;
-  padding: 15px 15px 15px 15px;
-  line-height: 200%;
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% calc(100% - 20px), 0% 100%, 0% 0%);
-  height: 8.5vh;
-  max-height: -moz-fit-content;
-  color: var(--white);
-  overflow: hidden;
-  box-sizing: border-box;
-  position: fixed;
-  top: 0;
-  left: 3%;
-  text-align: center;
-  transition: 1s ease-in-out;
-}
-
-.menu-flex:hover {
-  height: 30vh;
-  color: var(--white);
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% calc(100% - 20px), 0% 100%, 0% 0%);
-  transition: 1s ease-in-out;
-}
-
-.menu-flex i {
-  display: block;
-  font-size: 1.3em;
-  background-color: transparent;
-}
-
-.menu-flex i:hover {
-  color: var(--accent);
-  background-color: transparent;
-  letter-spacing: 1px;
-  border-radius: none;
-  padding: 0px;
-  border: solid 0px transparent;
-  text-decoration: none;
-  text-shadow: 1px 1px var(--lightbg);
+    background-color: var(--darkbg);
+    width: 5vw;
+    padding: 15px 15px 15px 15px;
+    line-height: 200%;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% calc(100% - 20px), 0% 100%, 0% 0%);
+    height: 8.5vh;
+    max-height: -moz-fit-content;
+    color: var(--white);
+    overflow: hidden;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 3%;
+    text-align: center;
+    transition: 1s ease-in-out;
+  }
   
-  -webkit-transition: none;
-  -moz-transition: none;
-  -ms-transition: none;
-  -o-transition: none;
-  transition: none;
-}
-
-.menu-flex a:hover {
-  color: var(--accent);
-  background-color: transparent;
-  letter-spacing: 1px;
-  border-radius: none;
-  padding: 0px;
-  border: solid 0px transparent;
-  text-decoration: none;
+  .menu-flex:hover {
+    height: 30vh;
+    color: var(--white);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% calc(100% - 20px), 0% 100%, 0% 0%);
+    transition: 1s ease-in-out;
+  }
   
-  -webkit-transition: none;
-  -moz-transition: none;
-  -ms-transition: none;
-  -o-transition: none;
-  transition: none;
-}
-
-.menu-flex a {
-  border-radius: none;
-  padding: 0px;
-  border: solid 0px transparent;
-  text-decoration: none;
+  .menu-flex i {
+    display: block;
+    font-size: 1.3em;
+    background-color: transparent;
+  }
   
-  -webkit-transition: none;
-  -moz-transition: none;
-  -ms-transition: none;
-  -o-transition: none;
-  transition: none;
-}
+  .menu-flex i:hover {
+    color: var(--accent);
+    background-color: transparent;
+    letter-spacing: 1px;
+    border-radius: none;
+    padding: 0px;
+    border: solid 0px transparent;
+    text-decoration: none;
+    text-shadow: 1px 1px var(--lightbg);
+    
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none;
+  }
+  
+  .menu-flex a:hover {
+    color: var(--accent);
+    background-color: transparent;
+    letter-spacing: 1px;
+    border-radius: none;
+    padding: 0px;
+    border: solid 0px transparent;
+    text-decoration: none;
+    
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none;
+  }
+  
+  .menu-flex a {
+    border-radius: none;
+    padding: 0px;
+    border: solid 0px transparent;
+    text-decoration: none;
+    
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none;
+  }
 
 /* ------------------------
 
@@ -773,39 +706,6 @@ styles for the toggleable menu
   color:var(--dgrey);
 } */
 
-
-/* ------------------------
-
-styles for the choices selections
-within the passage
-
------------------------- */
-
-.choices {
-  border-top: outset 1px var(--accent);
-  padding:3em;
-  margin-top:3em;
-  text-align: left;
-}
-
-/* .choice-item {
-  transition:0.4s;
-  cursor:pointer;
-  font-family:var(--monofont);
-  letter-spacing:0.1em;
-}
-
-.choice-item::before {
-  content: '\f124';
-  font: normal normal normal 14px/1 FontAwesome;
-  font-size:0.7em;
-  margin-right:1em;
-}
-
-.choice-item:hover {
-  color:var(--accent);
-  text-shadow: 1px 0px var(--accent);
-} */
 
 /* POPUP BOXES */
 
@@ -1229,7 +1129,7 @@ stuff for the mobile header
 @media only screen and (max-width: 750px) {
 	#header-text {
     white-space:nowrap;
-    transition:0.8s ease;
+    transition:0.8s ease-in-out;
 	}
   #header:hover #header-text {
     margin-top:0;
@@ -1242,7 +1142,7 @@ stuff for the mobile header
     border-top:0px solid transparent;
     margin-top:-40px;
     border-bottom:1px solid var(--darkbg);
-    transition:0.8s ease;
+    transition:0.8s ease-in-out;
   }
   #header:hover {
     padding:2em;
@@ -1250,7 +1150,7 @@ stuff for the mobile header
   }
   #passages {
     max-height:90vh;
-    transition:0.8s ease;
+    transition:0.8s ease-in-out;
   }
 }
 
@@ -1371,11 +1271,11 @@ body.gscreen .outer-container {
   background: black;
   border-radius: 10px;
   
-  -webkit-transition: all 1s ease;
-	-moz-transition: all 1s ease;
-	-ms-transition: all 1s ease;
-	-o-transition: all 1s ease;
-	transition: all 1s ease;
+  -webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-ms-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
 }
 
 body.gscreen .inner-container {
@@ -1389,11 +1289,11 @@ body.gscreen .inner-container {
   position:relative;
   z-index:3;
   
-  -webkit-transition: all 1s ease;
-	-moz-transition: all 1s ease;
-	-ms-transition: all 1s ease;
-	-o-transition: all 1s ease;
-	transition: all 1s ease;
+  -webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-ms-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
 } 
 
 body.gscreen .content-start {
@@ -1409,11 +1309,11 @@ body.gscreen .content-start {
   text-transform:uppercase;
   letter-spacing:5px;
   
-  -webkit-transition: all 1s ease;
-	-moz-transition: all 1s ease;
-	-ms-transition: all 1s ease;
-	-o-transition: all 1s ease;
-	transition: all 1s ease;
+  -webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-ms-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
 }
 
 /* Effect Screen Links */
@@ -1425,11 +1325,11 @@ body.gscreen a {
     border-radius: 0px;
     padding: 0px;
 	
-	-webkit-transition: all 1s ease;
-	-moz-transition: all 1s ease;
-	-ms-transition: all 1s ease;
-	-o-transition: all 1s ease;
-	transition: all 1s ease;
+	-webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-ms-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
 }
 
 body.gscreen a:hover {
@@ -1440,14 +1340,127 @@ body.gscreen a:hover {
     border-radius: 0px;
 	text-decoration: none;
 	
-	-webkit-transition: all 0.5s ease;
-	-moz-transition: all 0.5s ease;
-	-ms-transition: all 0.5s ease;
-	-o-transition: all 0.5s ease;
-	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
 }
 
+/* --- Different Theme Settings --- */
 
+/* LIGHT THEME */
+
+html.theme-light body {
+    color: var(--dgrey);
+	background-color: var(--lightbg);
+}
+
+html.theme-light #passages {
+    color: var(--dgrey);
+	background-color: var(--lightbg);
+    border: 10px solid var(--lightbg);
+    outline: 2px solid var(--dgrey);
+}
+html.theme-light a {
+	color: var(--dgrey);
+}
+html.theme-light a:hover {
+	color: var(--accent);
+	background-color: var(--white);
+}
+
+html.theme-light button {
+  border: solid 1.3px var(--white);
+  color: var(--dgrey);
+}
+html.theme-light button:hover {
+  background-color: var(--white);
+  border: solid 1.3px var(--white);
+  color: var(--accent);
+}
+html.theme-light #ui-dialog {
+  background-color: var(--lightbg);
+}
+html.theme-light #ui-dialog-titlebar {
+  background-color: var(--lightbg);
+  border: 1px solid var(--accent);
+}
+html.theme-light #ui-dialog-body {
+  background-color: var(--lightbg);
+  border: 1px solid var(--accent);
+}
+
+html.theme-light input, select, textarea {
+  color: var(--dgrey);
+  border: 1px solid var(--accent);
+  background-color: var(--lightbg);
+  font-family: var(--accent-font);
+  border-radius: 5px;
+  font-family: var(--accent-font);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+html.theme-light select:hover, html.theme-dark select:focus {
+  background-color: var(--lightbg);
+  border-color: var(--white);
+  font-family: var(--accent-font);
+  border-radius: 5px;
+  padding: 5px;
+}
+html.theme-light input:hover, html.theme-dark input:focus {
+  background-color: var(--lightbg);
+  border-color: var(--white);
+  font-family: var(--accent-font);
+  border-radius: 5px;
+  padding: 5px;
+}
+html.theme-light textarea:hover, html.theme-dark textarea:focus {
+  background-color: var(--lightbg);
+  border-color: var(--white);
+  font-family: var(--accent-font);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+html.theme-light .menu-flex {
+  background-color: var(--lightbg);
+  color: var(--dgrey);
+}
+
+html.theme-light .menu-flex:hover {
+  color: var(--accent);
+}
+
+html.theme-light .menu-flex i:hover {
+  color: var(--accent);
+  background-color: transparent;
+  letter-spacing: 1px;
+  border-radius: 0px;
+  padding: 0px;
+  
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+html.theme-light .menu-flex a:hover {
+  color: var(--accent);
+  background-color: transparent;
+  letter-spacing: 1px;
+  border-radius: none;
+  padding: 0px;
+  text-decoration: none;
+  
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+}
 
 /* EXTRA TEXT STYLING EFFECTS */
 
