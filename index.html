@@ -548,7 +548,7 @@ Hover Menu
 .menu-flex {
     background-color: var(--darkbg);
     width: 5vw;
-    padding: 15px 15px 15px 15px;
+    padding: 15px 10px 15px 10px;
     line-height: 200%;
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% calc(100% - 20px), 0% 100%, 0% 0%);
     height: 8.5vh;
@@ -621,6 +621,7 @@ Hover Menu
     -o-transition: none;
     transition: none;
   }
+
 
 /* ------------------------
 
@@ -2131,8 +2132,12 @@ When you do, you suddenly remember you&#39;re in a curiosity shop.
 
 /* CHARACTER ATTRIBUTES */
 
-&lt;&lt;set $name to &quot;&quot;&gt;&gt;
+&lt;&lt;set $fname to &quot;&quot;&gt;&gt;
+&lt;&lt;set $lname to &quot;&quot;&gt;&gt;
+&lt;&lt;set $nametitle to &quot;&quot;&gt;&gt;
+
 &lt;&lt;set $court to &quot;&quot;&gt;&gt;
+
 &lt;&lt;set $skincolour to &quot;&quot;&gt;&gt;
 &lt;&lt;set $eyecolour to &quot;&quot;&gt;&gt;
 &lt;&lt;set $bodytype to &quot;&quot;&gt;&gt;
@@ -2208,8 +2213,8 @@ RESUME GAME
   LOAD GAME
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="StorySubtitle" tags="ui" position="200,700" size="100,100"></tw-passagedata><tw-passagedata pid="10" name="StoryCaption" tags="ui" position="200,1000" size="100,100"></tw-passagedata><tw-passagedata pid="11" name="StoryDisplayTitle" tags="ui" position="200,900" size="100,100"></tw-passagedata><tw-passagedata pid="12" name="StoryAuthor" tags="ui" position="200,800" size="100,100"></tw-passagedata><tw-passagedata pid="13" name="Codex" tags="codex game-info no-return" position="300,200" size="100,100">&lt;&lt;link &quot;NPCs&quot; &quot;NPCs&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;link &quot;CC Test&quot; &quot;CC Test&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="Character" tags="character game-info no-return" position="200,200" size="100,100">&lt;h2 style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-family: &#39;Ander Symbols&#39;;&quot;&gt;0&lt;/span&gt;Physical Description&lt;span style=&quot;font-family: &#39;Ander Symbols&#39;;&quot;&gt;1&lt;/span&gt;&lt;/h2&gt;
-Name: $name
-Gender: 
+Name: $fname $lname
+Gender: $gender
 Pronouns: $they/$them
 Origin: 
 
@@ -2945,23 +2950,23 @@ Does this sound correct?
             &lt;br&gt;&lt;label&gt;&lt;&lt;radiobutton &quot;$ectype&quot; &quot;ec-same&quot; checked&gt;&gt; &amp;nbsp;the same as usual.&lt;&lt;update&gt;&gt;&lt;/label&gt;
             &lt;br&gt;&lt;label&gt;&lt;&lt;radiobutton &quot;$ectype&quot; &quot;ec-diff&quot;&gt;&gt; &amp;nbsp;different than usual.&lt;&lt;update&gt;&gt;&lt;/label&gt;
             &lt;br&gt;&lt;label&gt;&lt;&lt;radiobutton &quot;$ectype&quot; &quot;ec-solid&quot;&gt;&gt; &amp;nbsp;one solid colour.&lt;&lt;update&gt;&gt;&lt;/label&gt;
-           &lt;br&gt;&lt;&lt;link &quot;Select &lt;i class=&#39;fa fa-angles-right&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt;&quot;&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;replace &quot;#ec-choices&quot;&gt;&gt;&lt;&lt;include &quot;ec-listbox&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;
+           &lt;br&gt;&lt;&lt;link &quot;Select &lt;i class=&#39;fa fa-angles-right&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt;&quot;&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;replace &quot;#cc-choices&quot;&gt;&gt;&lt;&lt;include &quot;ec-listbox&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;
             &lt;&lt;liveblock&gt;&gt;&lt;&lt;if _ecvalue is true&gt;&gt;
             &lt;br&gt;Your eyes are &lt;&lt;eyecolour&gt;&gt;, which are &lt;&lt;if $ectype is &quot;ec-diff&quot;&gt;&gt;a different colour than usual&lt;&lt;elseif $ectype is &quot;ec-solid&quot;&gt;&gt;a completely solid colour&lt;&lt;else&gt;&gt;the same as usual&lt;&lt;/if&gt;&gt;.
             &lt;&lt;else&gt;&gt;
             &lt;&lt;/if&gt;&gt;&lt;&lt;/liveblock&gt;&gt;
-          &lt;div id=&quot;ec-choices&quot;&gt;&lt;/div&gt;
+          &lt;div id=&quot;cc-choices&quot;&gt;&lt;/div&gt;
             &lt;div class=&quot;choices&quot;&gt;
             &lt;&lt;link [[✦ Confirm choice?|FaeCC-eyes2]]&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;/link&gt;&gt;
             &lt;/div&gt;</tw-passagedata><tw-passagedata pid="44" name="FaeCC-eyes2" tags="" position="800,1100" size="100,100">&lt;&lt;liveblock&gt;&gt;Your eyes are &lt;&lt;eyecolour&gt;&gt;, which are &lt;&lt;if $ectype is &quot;ec-diff&quot;&gt;&gt;a different colour than usual&lt;&lt;elseif $ectype is &quot;ec-solid&quot;&gt;&gt;a completely solid colour&lt;&lt;else&gt;&gt;the same as usual&lt;&lt;/if&gt;&gt;.&lt;&lt;/liveblock&gt;&gt;
 
 Upon a closer inspection, do your eyes have any other interesting features?
 
-&lt;&lt;liveblock&gt;&gt;&lt;&lt;link &quot;&lt;i class=&#39;fa fa-eye&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt; Yes.&quot;&gt;&gt;&lt;&lt;set $eyextra to true&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;replace &quot;#ec-choices&quot;&gt;&gt;&lt;&lt;include &quot;ec-xtras&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;liveblock&gt;&gt;&lt;&lt;link &quot;&lt;i class=&#39;fa fa-eye&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt; Yes.&quot;&gt;&gt;&lt;&lt;set $eyextra to true&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;replace &quot;#cc-choices&quot;&gt;&gt;&lt;&lt;include &quot;ec-xtras&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;link &quot;&lt;i class=&#39;fa fa-eye-slash&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt; No.&quot; &quot;FaeCC-eyesEND&quot;&gt;&gt;&lt;&lt;set $eyextra to false&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/liveblock&gt;&gt;
 
-&lt;&lt;link &quot;&lt;span&gt;&lt;i class=&#39;fa fa-angles-right&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt;&lt;/span&gt;&quot;&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;replace &quot;#ec-choices&quot;&gt;&gt;&lt;&lt;include &quot;ec-xtras&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;div id=&quot;ec-choices&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="45" name="FaeCC-horns" tags="nobr choice" position="925,1000" size="100,100">Sprouting from your head are...
+&lt;&lt;link &quot;&lt;span&gt;&lt;i class=&#39;fa fa-angles-right&#39; aria-hidden=&#39;true&#39;&gt;&lt;/i&gt;&lt;/span&gt;&quot;&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;replace &quot;#cc-choices&quot;&gt;&gt;&lt;&lt;include &quot;ec-xtras&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;div id=&quot;cc-choices&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="45" name="FaeCC-horns" tags="nobr choice" position="925,1000" size="100,100">Sprouting from your head are...
 &lt;br&gt;
 &lt;&lt;liveblock&gt;&gt;
      &lt;&lt;if _hornsvalue is true&gt;&gt;
@@ -3101,16 +3106,14 @@ Standing with his hands planted firmly on his hips is a man with golden skin and
 
 &lt;div class=&quot;choices&quot;&gt;[[You have to admit, he&#39;s pretty attractive.|C1DN 04][$choice to 1]]
 [[He&#39;s kind of attractive, though I don&#39;t like how assertive he&#39;s being.|C1DN 04]]
-[[I&#39;m not thinking about looks right now, I&#39;m just taking in the situation.|C1DN 04]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="57" name="C1DN 04" tags="" position="1500,600" size="100,100">&lt;&lt;if $choice is 1&gt;&gt;You spend a bit more time than you intended looking over the man in front of you. He&#39;s lithe and average in height, and he wears clothes made of fine fabrics—not someone you&#39;d expect to be taking care of another.
+[[I&#39;m not thinking about looks right now, I&#39;m just taking in the situation.|C1DN 04]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="57" name="C1DN 04" tags="choice" position="1500,600" size="100,100">&lt;&lt;if $choice is 1&gt;&gt;You spend a bit more time than you intended looking over the man in front of you. He&#39;s lithe and average in height, and he wears clothes made of fine fabrics—not someone you&#39;d expect to be taking care of another.
 
 When your eyes meet his, the corner of his lips quirk up.
 &quot;Enjoying the view, are you?&quot; He asks, words dripping with self-satisfaction.
 
-Your cheeks warm in embarrassment, though it only lasts a moment, the stranger shattering your shame with his next words.
+You barely have a moment to formulate some kind of response to that in your head before the stranger continues. &quot;I&#39;d say the same in return, but you honestly look like a complete mess. You really should get up and ready yourself for the day like a proper court royal.&quot;
 
-&quot;I&#39;d say the same in return, but you honestly look like a complete mess. You really should get up and ready yourself for the day like a proper court royal.&quot;
-
-Anger and shame burn inside you, but just as you open your mouth to respond, he reaches out to catch your chin in his hand, thumb barely grazing over your lower lip.
+You can feel your cheeks burning, annoyed and embarrassed by his words, but just as you open your mouth to respond, he reaches out to catch your chin in his hand, thumb barely grazing over your lower lip.
 
 &quot;Oh, don&#39;t pout,&quot; he says, the impudence in his voice gone entirely. &quot;It&#39;s unbecoming of you.&quot;
 You feel like that should be an insult, but despite the mocking tone he gave you a moment before, his teasing now is hollow and his gaze intense.
@@ -3118,7 +3121,12 @@ Something about it has butterflies erupting in your stomach.
 
 Distracted and you are, you don&#39;t realize he just addressed you by name for the first time.
 
-[Name and pronoun]&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="C1SR 01" tags="choice" position="2100,225" size="100,100">You wake with a start, blinking your eyes as you&#39;re pulled out of sleep by hands on your shoulders shaking you with enough force to make your head spin.
+&lt;&lt;nobr&gt;&gt;
+&lt;&lt;if $pronounset&gt;&gt;
+&lt;&lt;else&gt;&gt;&lt;div id=&quot;cc-choices&quot;&gt;&lt;&lt;link &quot;&lt;i&gt;Set your name and pronouns&lt;/i&gt;&quot;&gt;&gt;&lt;/div&gt;&lt;&lt;update&gt;&gt;&lt;&lt;replace &quot;#cc-choices&quot;&gt;&gt;&lt;&lt;include &quot;PronounSet&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+&lt;&lt;/link&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;&lt;&lt;/if&gt;&gt;
+wippp</tw-passagedata><tw-passagedata pid="58" name="C1SR 01" tags="choice" position="2100,225" size="100,100">You wake with a start, blinking your eyes as you&#39;re pulled out of sleep by hands on your shoulders shaking you with enough force to make your head spin.
 
 &lt;div class=&quot;choices&quot;&gt;[[Their grip is firm, but I&#39;m strong. I shrug them off easily.|C1SR 02][$combat to &quot;strength&quot;]]
 [[I&#39;m not built for strength, but I am quick. I can slip out of the painful grip.|C1SR 02][$combat to &quot;dexterity&quot;]]
@@ -3148,16 +3156,15 @@ It only takes a moment longer before you notice the man also has long, pointed e
 The harsh whisper snaps you out of your thoughts, and you realize he&#39;s been calling your name.
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $pronounset&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;&lt;link &quot;&lt;i&gt;Set your name and pronouns&lt;/i&gt;&quot; &quot;PronounSet&quot;&gt;&gt;
+&lt;&lt;else&gt;&gt;&lt;div id=&quot;cc-choices&quot;&gt;&lt;&lt;link &quot;&lt;i&gt;Set your name and pronouns&lt;/i&gt;&quot;&gt;&gt;&lt;/div&gt;&lt;&lt;update&gt;&gt;&lt;&lt;replace &quot;#cc-choices&quot;&gt;&gt;&lt;&lt;include &quot;PronounSet&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/link&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-
-&quot;Ser $name, are you all right?&quot; He tucks a loose, dark blue lock behind an ear, still frowning down at you. &quot;You&#39;ve slept through most of the morning. Void, you were sleeping so hard I nearly thought you were dead! I wasn&#39;t sure if you&#39;d even wake.&quot;
+&lt;&lt;liveblock&gt;&gt;&lt;&lt;if $pronounset is true&gt;&gt;&quot;Ser $lname, are you all right?&quot; He tucks a loose, dark blue lock behind an ear, still frowning down at you. &quot;You&#39;ve slept through most of the morning. Void, you were sleeping so hard I nearly thought you were dead! I wasn&#39;t sure if you&#39;d even wake.&quot;
 
 &lt;div class=&quot;choices&quot;&gt;[[He really needs to slow down. This is so overwhelming. Am I dreaming?|C1SR 04][$choice to 1]]
 [[I&#39;m so confused. I&#39;ll be honest, but it might be best to keep the extent of my confusion hidden for now.|C1SR 04][$choice to 2]]
 [[Who did he say was looking for me? And what conference am I supposed to attend? |C1SR 04][$choice to 3]]
-[[I can try to play it off. I think. I don&#39;t know what&#39;s going on, but maybe it&#39;s best if I act like I do.|C1SR 04][$choice to 4]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="61" name="C1SR 04" tags="choice" position="2100,600" size="100,100">&lt;&lt;if $choice is 1&gt;&gt;Even with the lingering grogginess from the rude awakening, it still feels like you must be asleep. It&#39;s the only reasonable explanation… right?
+[[I can try to play it off. I think. I don&#39;t know what&#39;s going on, but maybe it&#39;s best if I act like I do.|C1SR 04][$choice to 4]]&lt;/div&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/liveblock&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="C1SR 04" tags="choice" position="2100,600" size="100,100">&lt;&lt;if $choice is 1&gt;&gt;Even with the lingering grogginess from the rude awakening, it still feels like you must be asleep. It&#39;s the only reasonable explanation… right?
 &quot;Slow down,&quot; you say with a hand raised and a crinkle of your brow, and that&#39;s enough to have the other go silent. &quot;What are you talking about?&quot;
 
 The question brings a crease to his brows, too, and he stands up straight to give you a good once-over. When he speaks, his words drip with a mixture of confusion and concern.
@@ -3201,9 +3208,9 @@ Finally, his eyebrows pull together further and he breaks the silence.
 &lt;&lt;else&gt;&gt; ... wip!!&lt;&lt;/if&gt;&gt;
 
 blah blah wip</tw-passagedata><tw-passagedata pid="62" name="PronounSet" tags="" position="1100,700" size="100,100">&lt;&lt;dialog &#39;Input your name and pronouns&#39;&gt;&gt;
-&lt;&lt;textbox &quot;$name&quot; &quot;&quot;&gt;&gt;
+&lt;&lt;textbox &quot;$fname&quot; &quot;&quot;&gt;&gt;&lt;&lt;textbox &quot;$lname&quot; &quot;&quot;&gt;&gt;
 &lt;span id=&quot;textbox-error&quot;&gt;&lt;/span&gt;
-&lt;&lt;button &quot;Set name&quot;&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;if $name is &quot;&quot;&gt;&gt;&lt;&lt;replace &quot;#textbox-error&quot;&gt;&gt;Please enter a name.&lt;&lt;/replace&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;replace &quot;#textbox-error&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button &quot;Set name&quot;&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;if $fname is &quot;&quot; || $lname is &quot;&quot;&gt;&gt;&lt;&lt;replace &quot;#textbox-error&quot;&gt;&gt;Please enter a name.&lt;&lt;/replace&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;replace &quot;#textbox-error&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/button&gt;&gt;
 
 &lt;span id=&quot;autofill&quot;&gt;
 Subjective: &lt;&lt;textbox &quot;$they&quot; &quot;they&quot;&gt;&gt;&lt;br&gt;
@@ -3251,7 +3258,7 @@ Is this a plural pronoun? &lt;&lt;listbox &quot;$plur&quot;&gt;&gt;
 &lt;&lt;option &quot;Yes&quot; true selected&gt;&gt;&lt;&lt;/listbox&gt;&gt;
 &lt;&lt;/replace&gt;&gt;&lt;&lt;/button&gt;&gt;
 
-&lt;div class=&quot;choices&quot;&gt;&lt;&lt;link &quot;Confirm&quot;  `previous()`&gt;&gt;&lt;&lt;set $pronounset = true&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;dialogclose&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;div class=&quot;choices&quot;&gt;&lt;&lt;link &quot;Confirm&quot;&gt;&gt;&lt;&lt;set $pronounset = true&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;dialogclose&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 &lt;&lt;/dialog&gt;&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
